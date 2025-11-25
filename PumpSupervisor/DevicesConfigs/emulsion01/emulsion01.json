@@ -1,0 +1,512 @@
+{
+  "id": "emulsion01",
+  "name": "1号乳化泵",
+  "poll_mode": "periodic",
+  "description": "1号乳化泵运行状态、温度、压力等参数",
+  "read_blocks": [
+    {
+      "start": 4,
+      "count": 32,
+      "comment": "传感器和状态数据 (地址 4-35)"
+    },
+    {
+      "start": 39,
+      "count": 14,
+      "comment": "报警和反馈状态 (地址 39-52)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "emulsion01OutPressure",
+      "name": "乳化泵1_出口压力",
+      "enabled": true,
+      "address": [ 4, 5 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01LubricatingOilPressure",
+      "name": "乳化泵1_润滑油压力",
+      "enabled": true,
+      "address": [ 6, 7 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01CrankshaftOilLevel",
+      "name": "乳化泵1_曲轴箱油位",
+      "enabled": true,
+      "address": [ 8, 9 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01CrankshaftOilTemperature",
+      "name": "乳化泵1_曲轴箱油温",
+      "enabled": true,
+      "address": [ 10, 11 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01FlowRate",
+      "name": "乳化泵1_流量",
+      "enabled": true,
+      "address": [ 14, 15 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01MotorTemperature",
+      "name": "乳化泵1_电机温度",
+      "enabled": true,
+      "address": [ 16, 17 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01MotorBeforeShaftTemperature",
+      "name": "乳化泵1_电机前轴温度",
+      "enabled": true,
+      "address": [ 18, 19 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01MotorAfterShaftTemperature",
+      "name": "乳化泵1_电机后轴温度",
+      "enabled": true,
+      "address": [ 20, 21 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01standby1",
+      "name": "乳化泵1_备用1",
+      "enabled": true,
+      "address": [ 22, 23 ],
+      "data_type": "float32",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01EnvironmentTemperature",
+      "name": "乳化泵1_电箱温度",
+      "enabled": true,
+      "address": [ 24, 25 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01EnvironmentHumidness",
+      "name": "乳化泵1_电箱湿度",
+      "enabled": true,
+      "address": [ 26, 27 ],
+      "data_type": "float32",
+      "unit": "%",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "emulsion01IWOState",
+      "name": "乳化泵1_输入IW0状态",
+      "enabled": true,
+      "address": [ 28 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01IwoMessage_PumpFeedback",
+          "name": "乳化泵1_输入IW0状态_泵运行反馈"
+        },
+        "1": {
+          "code": "emulsion01IwoMessage_PumpEmergencyStop",
+          "name": "乳化泵1_输入IW0状态_急停"
+        },
+        "2": {
+          "code": "emulsion01IwoMessage_PumpRemoteLocal",
+          "name": "乳化泵1_输入IW0状态_集控本地"
+        },
+        "3": {
+          "code": "emulsion01IwoMessage_Reset",
+          "name": "乳化泵1_输入IW0状态_复位"
+        },
+        "4": {
+          "code": "emulsion01IwoMessage_JointControlStartStop",
+          "name": "乳化泵1_输入IW0状态_联控启停"
+        },
+        "5": {
+          "code": "emulsion01IwoMessage_SinglePumpStartStop",
+          "name": "乳化泵1_输入IW0状态_单泵启停"
+        }
+      }
+    },
+    {
+      "code": "emulsion01QWOState",
+      "name": "乳化泵1_输出QWO状态",
+      "enabled": true,
+      "address": [ 29 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01QwoMessage_PumpStartStop",
+          "name": "乳化泵1_输出QWO状态_泵启停"
+        },
+        "1": {
+          "code": "emulsion01QwoMessage_PressureReliefValve",
+          "name": "乳化泵1_输出QWO状态_泄压阀"
+        },
+        "2": {
+          "code": "emulsion01QwoMessage_AlarmLight",
+          "name": "乳化泵1_输出QWO状态_报警灯"
+        },
+        "3": {
+          "code": "emulsion01QwoMessage_InletValve",
+          "name": "乳化泵1_输出QWO状态_进水阀"
+        },
+        "4": {
+          "code": "emulsion01QwoMessage_MainPipePressureReliefValve",
+          "name": "乳化泵1_输出QWO状态_总管泄压阀"
+        }
+      }
+    },
+    {
+      "code": "emulsion01AccumulatedTime",
+      "name": "乳化泵1_累计工作小时",
+      "enabled": true,
+      "address": [ 30, 31 ],
+      "data_type": "uint32",
+      "unit": "h",
+      "scale": 0.001,
+      "offset": 0.0,
+      "precision": 1,
+      "description": "累计运行时间，原始值为毫秒，1000=1小时"
+    },
+    {
+      "code": "emulsion01OnceTime",
+      "name": "乳化泵1_单次运行时间",
+      "enabled": true,
+      "address": [ 32, 33 ],
+      "data_type": "uint32",
+      "unit": "h",
+      "scale": 0.001,
+      "offset": 0.0,
+      "precision": 1,
+      "description": "单次运行时间，原始值为毫秒，1000=1小时"
+    },
+    {
+      "code": "emulsion01WorkingMode",
+      "name": "乳化泵1_运行模式",
+      "enabled": true,
+      "address": [ 34 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "手动",
+        "1": "自动",
+        "2": "检修"
+      }
+    },
+    {
+      "code": "emulsion01WorkingState",
+      "name": "乳化泵1_运行模式",
+      "enabled": true,
+      "address": [ 35 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "本地",
+        "1": "集控"
+      }
+    },
+    {
+      "code": "emulsion01OilPressureWarningState",
+      "name": "乳化泵1_润滑油压力报警状态",
+      "enabled": true,
+      "address": [ 39 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01OilPressureAlarmMessage_HighAlarm",
+          "name": "乳化泵1_润滑油压力高报警"
+        },
+        "1": {
+          "code": "emulsion01OilPressureAlarmMessage_HighWarning",
+          "name": "乳化泵1_润滑油压力高预警"
+        },
+        "2": {
+          "code": "emulsion01OilPressureAlarmMessage_LowWarning",
+          "name": "乳化泵1_润滑油压力低预警"
+        },
+        "3": {
+          "code": "emulsion01OilPressureAlarmMessage_LowAlarm",
+          "name": "乳化泵1_润滑油压力低报警"
+        }
+      }
+    },
+    {
+      "code": "emulsion01CrankcaseOilLevelWarningState",
+      "name": "乳化泵1_曲轴箱油位报警状态",
+      "enabled": true,
+      "address": [ 40 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01CrankcaseOilLevelAlarmMessage_HighAlarm",
+          "name": "乳化泵1_曲轴箱油位高报警"
+        },
+        "1": {
+          "code": "emulsion01CrankcaseOilLevelAlarmMessage_HighWarning",
+          "name": "乳化泵1_曲轴箱油位高预警"
+        },
+        "2": {
+          "code": "emulsion01CrankcaseOilLevelAlarmMessage_LowWarning",
+          "name": "乳化泵1_曲轴箱油位低预警"
+        },
+        "3": {
+          "code": "emulsion01CrankcaseOilLevelAlarmMessage_LowAlarm",
+          "name": "乳化泵1_曲轴箱油位低报警"
+        }
+      }
+    },
+    {
+      "code": "emulsion01CrankcaseTemperatureWarningState",
+      "name": "乳化泵1_曲轴箱温度报警状态",
+      "enabled": true,
+      "address": [ 41 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01CrankcaseTemperatureAlarmMessage_HighAlarm",
+          "name": "乳化泵1_曲轴箱温度高报警"
+        },
+        "1": {
+          "code": "emulsion01CrankcaseTemperatureAlarmMessage_HighWarning",
+          "name": "乳化泵1_曲轴箱温度高预警"
+        },
+        "2": {
+          "code": "emulsion01CrankcaseTemperatureAlarmMessage_LowWarning",
+          "name": "乳化泵1_曲轴箱温度低预警"
+        },
+        "3": {
+          "code": "emulsion01CrankcaseTemperatureAlarmMessage_LowAlarm",
+          "name": "乳化泵1_曲轴箱温度低报警"
+        }
+      }
+    },
+    {
+      "code": "emulsion01MotorTemperatureWarningState",
+      "name": "乳化泵1_电机温度报警状态",
+      "enabled": true,
+      "address": [ 44 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01MotorTemperatureAlarmMessage_HighAlarm",
+          "name": "乳化泵1_电机温度高报警"
+        },
+        "1": {
+          "code": "emulsion01MotorTemperatureAlarmMessage_HighWarning",
+          "name": "乳化泵1_电机温度高预警"
+        },
+        "2": {
+          "code": "emulsion01MotorTemperatureAlarmMessage_LowWarning",
+          "name": "乳化泵1_电机温度低预警"
+        },
+        "3": {
+          "code": "emulsion01MotorTemperatureAlarmMessage_LowAlarm",
+          "name": "乳化泵1_电机温度低报警"
+        }
+      }
+    },
+    {
+      "code": "emulsion01BeforeShaftTemperatureWarningState",
+      "name": "乳化泵1_前轴端温度报警状态",
+      "enabled": true,
+      "address": [ 45 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01BeforeShaftTemperatureAlarmMessage_HighAlarm",
+          "name": "乳化泵1_前轴端温度高报警"
+        },
+        "1": {
+          "code": "emulsion01BeforeShaftTemperatureAlarmMessage_HighWarning",
+          "name": "乳化泵1_前轴端温度高预警"
+        },
+        "2": {
+          "code": "emulsion01BeforeShaftTemperatureAlarmMessage_LowWarning",
+          "name": "乳化泵1_前轴端温度低预警"
+        },
+        "3": {
+          "code": "emulsion01BeforeShaftTemperatureAlarmMessage_LowAlarm",
+          "name": "乳化泵1_前轴端温度低报警"
+        }
+      }
+    },
+    {
+      "code": "emulsion01AfterShaftTemperatureWarningState",
+      "name": "乳化泵1_后轴端温度报警状态",
+      "enabled": true,
+      "address": [ 46 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01AfterShaftTemperatureAlarmMessage_HighAlarm",
+          "name": "乳化泵1_后轴端温度高报警"
+        },
+        "1": {
+          "code": "emulsion01AfterShaftTemperatureAlarmMessage_HighWarning",
+          "name": "乳化泵1_后轴端温度高预警"
+        },
+        "2": {
+          "code": "emulsion01AfterShaftTemperatureAlarmMessage_LowWarning",
+          "name": "乳化泵1_后轴端温度低预警"
+        },
+        "3": {
+          "code": "emulsion01AfterShaftTemperatureAlarmMessage_LowAlarm",
+          "name": "乳化泵1_后轴端温度低报警"
+        }
+      }
+    },
+    {
+      "code": "emulsion01OtherWarningState",
+      "name": "乳化泵1_其他报警状态",
+      "enabled": true,
+      "address": [ 50 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsion01OtherAlarmMessage_PressureLossAlarm",
+          "name": "乳化泵1_其他报警_失压报警"
+        },
+        "1": {
+          "code": "emulsion01OtherAlarmMessage_EmergencyStopAlarm",
+          "name": "乳化泵1_其他报警_急停报警"
+        },
+        "2": {
+          "code": "emulsion01OtherAlarmMessage_CentralizedControlMaintenance",
+          "name": "乳化泵1_其他报警_集控检修状态"
+        },
+        "3": {
+          "code": "emulsion01OtherAlarmMessage_CentralizedEmergencyStop",
+          "name": "乳化泵1_其他报警_集控急停"
+        }
+      }
+    },
+    {
+      "code": "emulsion01AlarmStatus",
+      "name": "乳化泵1_报警状态",
+      "enabled": true,
+      "address": [ 51 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "正常",
+        "1": "报警"
+      }
+    },
+    {
+      "code": "emulsion01RunFeedback",
+      "name": "乳化泵1_运行反馈",
+      "enabled": true,
+      "address": [ 52 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "停止",
+        "1": "运行"
+      }
+    }
+  ]
+}

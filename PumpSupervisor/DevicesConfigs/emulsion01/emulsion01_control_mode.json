@@ -1,0 +1,31 @@
+{
+  "id": "emulsion01_control_mode",
+  "name": "乳化泵1控制模式",
+  "poll_mode": "on_demand",
+  "description": "乳化泵1控制模式，写之前需要读取其值",
+  "read_blocks": [
+    {
+      "start": 96,
+      "count": 1,
+      "comment": "乳化泵1手动/自动控制 (地址 96-96)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "emulsion01_pump_mode",
+      "name": "乳化泵1手动/自动",
+      "enabled": true,
+      "address": [ 96 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "1": "手动",
+        "2": "自动"
+      }
+    }
+  ]
+}

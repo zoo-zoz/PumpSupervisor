@@ -1,0 +1,471 @@
+{
+  "id": "emulsion02_parameter_settings",
+  "name": "乳化泵2参数设置",
+  "poll_mode": "on_demand",
+  "description": "乳化泵2参数设置，写之前需要读取其值",
+  "read_blocks": [
+    {
+      "start": 424,
+      "count": 51,
+      "comment": "乳化泵2参数 (地址 424-474)"
+    },
+    {
+      "start": 484,
+      "count": 43,
+      "comment": "乳化泵2参数 (地址 484-526)"
+    },
+    {
+      "start": 572,
+      "count": 17,
+      "comment": "乳化泵2参数 (地址 572-588)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "Emulsion2OutPressureUpperLimit",
+      "name": "出口压力上限",
+      "enabled": true,
+      "address": [ 424, 425 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2OutPressureLowerLimit",
+      "name": "出口压力下限",
+      "enabled": true,
+      "address": [ 426, 427 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2LubricatingOilPressureUpperLimit",
+      "name": "润滑油压力上限",
+      "enabled": true,
+      "address": [ 436, 437 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2LubricatingOilPressureLowerLimit",
+      "name": "润滑油压力下限",
+      "enabled": true,
+      "address": [ 438, 439 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2LubricatingOilPressureLowWarning",
+      "name": "润滑油压力低预警",
+      "enabled": true,
+      "address": [ 444, 445 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2LubricatingOilPressureLowAlarm",
+      "name": "润滑油压力低报警",
+      "enabled": true,
+      "address": [ 446, 447 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxOilLevelUpperLimit",
+      "name": "曲轴箱油位上限",
+      "enabled": true,
+      "address": [ 448, 449 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxOilLevelLowerLimit",
+      "name": "曲轴箱油位下限",
+      "enabled": true,
+      "address": [ 450, 451 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxOilLevelLowerwarning",
+      "name": "曲轴箱油位低预警",
+      "enabled": true,
+      "address": [ 456, 457 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxOilLevelLowerAlarm",
+      "name": "曲轴箱油位低报警",
+      "enabled": true,
+      "address": [ 458, 459 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxTemperatureUpperLimit",
+      "name": "曲轴箱温度上限",
+      "enabled": true,
+      "address": [ 460, 461 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxTemperatureLowerLimit",
+      "name": "曲轴箱温度下限",
+      "enabled": true,
+      "address": [ 462, 463 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxTemperatureAlarm",
+      "name": "曲轴箱温度高报警",
+      "enabled": true,
+      "address": [ 464, 465 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2CrankshaftBoxTemperatureWarning",
+      "name": "曲轴箱温度高预警",
+      "enabled": true,
+      "address": [ 466, 467 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2TotalFlowUpperLimit",
+      "name": "总流量上限",
+      "enabled": true,
+      "address": [ 472, 473 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2TotalFlowLowerLimit",
+      "name": "总流量下限",
+      "enabled": true,
+      "address": [ 474, 475 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2PipeFlowUpperLimit",
+      "name": "分管流量上限",
+      "enabled": true,
+      "address": [ 484, 485 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2PipeFlowLowerLimit",
+      "name": "分管流量下限",
+      "enabled": true,
+      "address": [ 486, 487 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2MotorTemperatureUpperLimit",
+      "name": "电动机温度上限",
+      "enabled": true,
+      "address": [ 496, 497 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2MotorTemperatureLowerLimit",
+      "name": "电动机温度下限",
+      "enabled": true,
+      "address": [ 498, 499 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2MotorTemperatureAlarm",
+      "name": "电动机温度高报警",
+      "enabled": true,
+      "address": [ 500, 501 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2MotorTemperatureWarning",
+      "name": "电动机温度高预警",
+      "enabled": true,
+      "address": [ 502, 503 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2BeforeShaftTempertureUpperLimit",
+      "name": "前轴温度上限",
+      "enabled": true,
+      "address": [ 508, 509 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2BeforeShaftTempertureLowerLimit",
+      "name": "前轴温度下限",
+      "enabled": true,
+      "address": [ 510, 511 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2BeforeShaftTempertureHighAlarm",
+      "name": "前轴温度高报警",
+      "enabled": true,
+      "address": [ 512, 513 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2BeforeShaftTempertureHighWarning",
+      "name": "前轴温度高预警",
+      "enabled": true,
+      "address": [ 514, 515 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2AfterShaftTempertureUpperLimit",
+      "name": "后轴温度上限",
+      "enabled": true,
+      "address": [ 520, 521 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2AfterShaftTempertureLowerLimit",
+      "name": "后轴温度下限",
+      "enabled": true,
+      "address": [ 522, 523 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2AfterShaftTempertureHighAlarm",
+      "name": "后轴温度高报警",
+      "enabled": true,
+      "address": [ 524, 525 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2AfterShaftTempertureHighWarning",
+      "name": "后轴温度高预警",
+      "enabled": true,
+      "address": [ 526, 527 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2StartMaximumPressure",
+      "name": "泵启动最高压力",
+      "enabled": true,
+      "address": [ 572, 573 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2PressureValveOpenValue",
+      "name": "泄压阀开启值",
+      "enabled": true,
+      "address": [ 574, 575 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2PressureValveCloseValue",
+      "name": "泄压阀关闭值",
+      "enabled": true,
+      "address": [ 576, 577 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Emulsion2SensorSwitch",
+      "name": "集控传感器开关",
+      "enabled": true,
+      "address": [ 588 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "Emulsion2EnableParametersMotorTemperature",
+          "name": "电机温度传感器开关"
+        },
+        "1": {
+          "code": "Emulsion2EnableParametersBeforeShaftTemperture",
+          "name": "前轴端温度传感器开关"
+        },
+        "2": {
+          "code": "Emulsion2EnableParametersAfterShaftTemperture",
+          "name": "后轴端温度传感器开关"
+        },
+        "4": {
+          "code": "Emulsion2EnableParametersEnvironmentHumidness",
+          "name": "电箱温湿度传感器开关"
+        },
+        "10": {
+          "code": "Emulsion2EnableParametersOutPressure",
+          "name": "出口压力传感器开关"
+        },
+        "11": {
+          "code": "Emulsion2EnableParametersLubricatingOilPressure",
+          "name": "润滑油压力传感器开关"
+        },
+        "12": {
+          "code": "Emulsion2EnableParametersCrankshaftBoxOilLevel",
+          "name": "曲轴箱油位传感器开关"
+        },
+        "13": {
+          "code": "Emulsion2EnableParametersCrankshaftBoxTemperature",
+          "name": "曲轴箱温度传感器开关"
+        },
+        "15": {
+          "code": "Emulsion2EnableParametersPipeFlow",
+          "name": "分管流量传感器开关"
+        }
+      }
+    }
+  ]
+}

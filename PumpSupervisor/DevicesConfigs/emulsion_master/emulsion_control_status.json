@@ -1,0 +1,51 @@
+{
+  "id": "emulsion_control_status",
+  "name": "乳化泵主站设备控制状态",
+  "poll_mode": "on_demand",
+  "description": "乳化泵主站设备控制状态，写之前需要读取其值",
+  "read_blocks": [
+    {
+      "start": 1500,
+      "count": 4,
+      "comment": "联控启动和急停 (地址 1500-1503)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "emulsion_joint_control_start",
+      "name": "乳化系统联控启动",
+      "enabled": true,
+      "address": [ 1500 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "emulsion_joint_control_stop",
+      "name": "乳化系统联控停止",
+      "enabled": true,
+      "address": [ 1501 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "emulsion_emergency_stop",
+      "name": "乳化系统急停",
+      "enabled": true,
+      "address": [ 1504 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    }
+  ]
+}

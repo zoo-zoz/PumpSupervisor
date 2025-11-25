@@ -1,0 +1,512 @@
+{
+  "id": "atomizing01",
+  "name": "1号喷雾泵",
+  "poll_mode": "periodic",
+  "description": "1号喷雾泵运行状态、温度、压力等参数",
+  "read_blocks": [
+    {
+      "start": 4,
+      "count": 32,
+      "comment": "传感器和状态数据 (地址 4-35)"
+    },
+    {
+      "start": 39,
+      "count": 14,
+      "comment": "报警和反馈状态 (地址 39-52)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "atomizing01OutPressure",
+      "name": "喷雾泵1_出口压力",
+      "enabled": true,
+      "address": [ 4, 5 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01LubricatingOilPressure",
+      "name": "喷雾泵1_润滑油压力",
+      "enabled": true,
+      "address": [ 6, 7 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01CrankshaftOilLevel",
+      "name": "喷雾泵1_曲轴箱油位",
+      "enabled": true,
+      "address": [ 8, 9 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01CrankshaftOilTemperature",
+      "name": "喷雾泵1_曲轴箱油温",
+      "enabled": true,
+      "address": [ 10, 11 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01FlowRate",
+      "name": "喷雾泵1_流量",
+      "enabled": true,
+      "address": [ 14, 15 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01MotorTemperature",
+      "name": "喷雾泵1_电机温度",
+      "enabled": true,
+      "address": [ 16, 17 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01MotorBeforeShaftTemperature",
+      "name": "喷雾泵1_电机前轴温度",
+      "enabled": true,
+      "address": [ 18, 19 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01MotorAfterShaftTemperature",
+      "name": "喷雾泵1_电机后轴温度",
+      "enabled": true,
+      "address": [ 20, 21 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01standby1",
+      "name": "喷雾泵1_备用1",
+      "enabled": true,
+      "address": [ 22, 23 ],
+      "data_type": "float32",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01EnvironmentTemperature",
+      "name": "喷雾泵1_电箱温度",
+      "enabled": true,
+      "address": [ 24, 25 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01EnvironmentHumidness",
+      "name": "喷雾泵1_电箱湿度",
+      "enabled": true,
+      "address": [ 26, 27 ],
+      "data_type": "float32",
+      "unit": "%",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2
+    },
+    {
+      "code": "atomizing01IWOState",
+      "name": "喷雾泵1_输入IW0状态",
+      "enabled": true,
+      "address": [ 28 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01IwoMessage_PumpFeedback",
+          "name": "喷雾泵1_输入IW0状态_泵运行反馈"
+        },
+        "1": {
+          "code": "atomizing01IwoMessage_PumpEmergencyStop",
+          "name": "喷雾泵1_输入IW0状态_急停"
+        },
+        "2": {
+          "code": "atomizing01IwoMessage_PumpRemoteLocal",
+          "name": "喷雾泵1_输入IW0状态_集控本地"
+        },
+        "3": {
+          "code": "atomizing01IwoMessage_Reset",
+          "name": "喷雾泵1_输入IW0状态_复位"
+        },
+        "4": {
+          "code": "atomizing01IwoMessage_JointControlStartStop",
+          "name": "喷雾泵1_输入IW0状态_联控启停"
+        },
+        "5": {
+          "code": "atomizing01IwoMessage_SinglePumpStartStop",
+          "name": "喷雾泵1_输入IW0状态_单泵启停"
+        }
+      }
+    },
+    {
+      "code": "atomizing01QWOState",
+      "name": "喷雾泵1_输出QWO状态",
+      "enabled": true,
+      "address": [ 29 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01QwoMessage_PumpStartStop",
+          "name": "喷雾泵1_输出QWO状态_泵启停"
+        },
+        "1": {
+          "code": "atomizing01QwoMessage_PressureReliefValve",
+          "name": "喷雾泵1_输出QWO状态_泄压阀"
+        },
+        "2": {
+          "code": "atomizing01QwoMessage_AlarmLight",
+          "name": "喷雾泵1_输出QWO状态_报警灯"
+        },
+        "3": {
+          "code": "atomizing01QwoMessage_InletValve",
+          "name": "喷雾泵1_输出QWO状态_进水阀"
+        },
+        "4": {
+          "code": "atomizing01QwoMessage_MainPipePressureReliefValve",
+          "name": "喷雾泵1_输出QWO状态_总管泄压阀"
+        }
+      }
+    },
+    {
+      "code": "atomizing01AccumulatedTime",
+      "name": "喷雾泵1_累计工作小时",
+      "enabled": true,
+      "address": [ 30, 31 ],
+      "data_type": "uint32",
+      "unit": "h",
+      "scale": 0.001,
+      "offset": 0.0,
+      "precision": 1,
+      "description": "累计运行时间，原始值为毫秒，1000=1小时"
+    },
+    {
+      "code": "atomizing01OnceTime",
+      "name": "喷雾泵1_单次运行时间",
+      "enabled": true,
+      "address": [ 32, 33 ],
+      "data_type": "uint32",
+      "unit": "h",
+      "scale": 0.001,
+      "offset": 0.0,
+      "precision": 1,
+      "description": "单次运行时间，原始值为毫秒，1000=1小时"
+    },
+    {
+      "code": "atomizing01WorkingMode",
+      "name": "喷雾泵1_运行模式",
+      "enabled": true,
+      "address": [ 34 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "手动",
+        "1": "自动",
+        "2": "检修"
+      }
+    },
+    {
+      "code": "atomizing01WorkingState",
+      "name": "喷雾泵1_运行模式",
+      "enabled": true,
+      "address": [ 35 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "本地",
+        "1": "集控"
+      }
+    },
+    {
+      "code": "atomizing01OilPressureWarningState",
+      "name": "喷雾泵1_润滑油压力报警状态",
+      "enabled": true,
+      "address": [ 39 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01OilPressureAlarmMessage_HighAlarm",
+          "name": "喷雾泵1_润滑油压力高报警"
+        },
+        "1": {
+          "code": "atomizing01OilPressureAlarmMessage_HighWarning",
+          "name": "喷雾泵1_润滑油压力高预警"
+        },
+        "2": {
+          "code": "atomizing01OilPressureAlarmMessage_LowWarning",
+          "name": "喷雾泵1_润滑油压力低预警"
+        },
+        "3": {
+          "code": "atomizing01OilPressureAlarmMessage_LowAlarm",
+          "name": "喷雾泵1_润滑油压力低报警"
+        }
+      }
+    },
+    {
+      "code": "atomizing01CrankcaseOilLevelWarningState",
+      "name": "喷雾泵1_曲轴箱油位报警状态",
+      "enabled": true,
+      "address": [ 40 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01CrankcaseOilLevelAlarmMessage_HighAlarm",
+          "name": "喷雾泵1_曲轴箱油位高报警"
+        },
+        "1": {
+          "code": "atomizing01CrankcaseOilLevelAlarmMessage_HighWarning",
+          "name": "喷雾泵1_曲轴箱油位高预警"
+        },
+        "2": {
+          "code": "atomizing01CrankcaseOilLevelAlarmMessage_LowWarning",
+          "name": "喷雾泵1_曲轴箱油位低预警"
+        },
+        "3": {
+          "code": "atomizing01CrankcaseOilLevelAlarmMessage_LowAlarm",
+          "name": "喷雾泵1_曲轴箱油位低报警"
+        }
+      }
+    },
+    {
+      "code": "atomizing01CrankcaseTemperatureWarningState",
+      "name": "喷雾泵1_曲轴箱温度报警状态",
+      "enabled": true,
+      "address": [ 41 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01CrankcaseTemperatureAlarmMessage_HighAlarm",
+          "name": "喷雾泵1_曲轴箱温度高报警"
+        },
+        "1": {
+          "code": "atomizing01CrankcaseTemperatureAlarmMessage_HighWarning",
+          "name": "喷雾泵1_曲轴箱温度高预警"
+        },
+        "2": {
+          "code": "atomizing01CrankcaseTemperatureAlarmMessage_LowWarning",
+          "name": "喷雾泵1_曲轴箱温度低预警"
+        },
+        "3": {
+          "code": "atomizing01CrankcaseTemperatureAlarmMessage_LowAlarm",
+          "name": "喷雾泵1_曲轴箱温度低报警"
+        }
+      }
+    },
+    {
+      "code": "atomizing01MotorTemperatureWarningState",
+      "name": "喷雾泵1_电机温度报警状态",
+      "enabled": true,
+      "address": [ 44 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01MotorTemperatureAlarmMessage_HighAlarm",
+          "name": "喷雾泵1_电机温度高报警"
+        },
+        "1": {
+          "code": "atomizing01MotorTemperatureAlarmMessage_HighWarning",
+          "name": "喷雾泵1_电机温度高预警"
+        },
+        "2": {
+          "code": "atomizing01MotorTemperatureAlarmMessage_LowWarning",
+          "name": "喷雾泵1_电机温度低预警"
+        },
+        "3": {
+          "code": "atomizing01MotorTemperatureAlarmMessage_LowAlarm",
+          "name": "喷雾泵1_电机温度低报警"
+        }
+      }
+    },
+    {
+      "code": "atomizing01BeforeShaftTemperatureWarningState",
+      "name": "喷雾泵1_前轴端温度报警状态",
+      "enabled": true,
+      "address": [ 45 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01BeforeShaftTemperatureAlarmMessage_HighAlarm",
+          "name": "喷雾泵1_前轴端温度高报警"
+        },
+        "1": {
+          "code": "atomizing01BeforeShaftTemperatureAlarmMessage_HighWarning",
+          "name": "喷雾泵1_前轴端温度高预警"
+        },
+        "2": {
+          "code": "atomizing01BeforeShaftTemperatureAlarmMessage_LowWarning",
+          "name": "喷雾泵1_前轴端温度低预警"
+        },
+        "3": {
+          "code": "atomizing01BeforeShaftTemperatureAlarmMessage_LowAlarm",
+          "name": "喷雾泵1_前轴端温度低报警"
+        }
+      }
+    },
+    {
+      "code": "atomizing01AfterShaftTemperatureWarningState",
+      "name": "喷雾泵1_后轴端温度报警状态",
+      "enabled": true,
+      "address": [ 46 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01AfterShaftTemperatureAlarmMessage_HighAlarm",
+          "name": "喷雾泵1_后轴端温度高报警"
+        },
+        "1": {
+          "code": "atomizing01AfterShaftTemperatureAlarmMessage_HighWarning",
+          "name": "喷雾泵1_后轴端温度高预警"
+        },
+        "2": {
+          "code": "atomizing01AfterShaftTemperatureAlarmMessage_LowWarning",
+          "name": "喷雾泵1_后轴端温度低预警"
+        },
+        "3": {
+          "code": "atomizing01AfterShaftTemperatureAlarmMessage_LowAlarm",
+          "name": "喷雾泵1_后轴端温度低报警"
+        }
+      }
+    },
+    {
+      "code": "atomizing01OtherWarningState",
+      "name": "喷雾泵1_其他报警状态",
+      "enabled": true,
+      "address": [ 50 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "atomizing01OtherAlarmMessage_PressureLossAlarm",
+          "name": "喷雾泵1_其他报警_失压报警"
+        },
+        "1": {
+          "code": "atomizing01OtherAlarmMessage_EmergencyStopAlarm",
+          "name": "喷雾泵1_其他报警_急停报警"
+        },
+        "2": {
+          "code": "atomizing01OtherAlarmMessage_CentralizedControlMaintenance",
+          "name": "喷雾泵1_其他报警_集控检修状态"
+        },
+        "3": {
+          "code": "atomizing01OtherAlarmMessage_CentralizedEmergencyStop",
+          "name": "喷雾泵1_其他报警_集控急停"
+        }
+      }
+    },
+    {
+      "code": "atomizing01AlarmStatus",
+      "name": "喷雾泵1_报警状态",
+      "enabled": true,
+      "address": [ 51 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "正常",
+        "1": "报警"
+      }
+    },
+    {
+      "code": "atomizing01RunFeedback",
+      "name": "喷雾泵1_运行反馈",
+      "enabled": true,
+      "address": [ 52 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "停止",
+        "1": "运行"
+      }
+    }
+  ]
+}

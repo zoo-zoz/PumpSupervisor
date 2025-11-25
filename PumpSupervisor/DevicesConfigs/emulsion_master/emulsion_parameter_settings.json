@@ -1,0 +1,395 @@
+{
+  "id": "emulsion_parameter_settings",
+  "name": "乳化泵主站设备参数设置",
+  "poll_mode": "on_demand",
+  "description": "设置乳化系统的参数，修改参数前需要读取全部最新参数",
+  "read_blocks": [
+    {
+      "start": 100,
+      "count": 23,
+      "comment": "压力和液位参数设置 (地址 100-122)"
+    },
+    {
+      "start": 182,
+      "count": 1,
+      "comment": "联控低流量停泵参数设置 (地址 182-182)"
+    },
+    {
+      "start": 268,
+      "count": 31,
+      "comment": "其他参数设置 (地址 268-298)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "HydraulicPressureUpperLimit",
+      "name": "液压压力量程上限",
+      "enabled": true,
+      "address": [ 100, 101 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureLowerLimit",
+      "name": "液压压力量程下限",
+      "enabled": true,
+      "address": [ 102, 103 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureHighAlarm",
+      "name": "液压压力高报警",
+      "enabled": true,
+      "address": [ 104, 105 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureHighWarning",
+      "name": "液压压力高预警",
+      "enabled": true,
+      "address": [ 106, 107 ],
+      "data_type": "float32",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureLowWarning",
+      "name": "液压压力低预警",
+      "enabled": true,
+      "address": [ 108, 109 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureLowAlarm",
+      "name": "液压压力低报警",
+      "enabled": true,
+      "address": [ 110, 111 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicLiquidBoxLevelUpperLimit",
+      "name": "液箱液位量程上限",
+      "enabled": true,
+      "address": [ 112, 113 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicLiquidBoxLevelLowerLimit",
+      "name": "液箱液位量程下限",
+      "enabled": true,
+      "address": [ 114, 115 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicLiquidBoxLevelHighAlarm",
+      "name": "液箱液位高报警",
+      "enabled": true,
+      "address": [ 116, 117 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicLiquidBoxLevelHighWarning",
+      "name": "液箱液位高预警",
+      "enabled": true,
+      "address": [ 118, 119 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicLiquidBoxLevelLowWarning",
+      "name": "液箱液位低预警",
+      "enabled": true,
+      "address": [ 120, 121 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicLiquidBoxLevelLowAlarm",
+      "name": "液箱液位低报警",
+      "enabled": true,
+      "address": [ 122, 123 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureFlowLowStopPumpValue",
+      "name": "流量低停泵值",
+      "enabled": true,
+      "address": [ 182, 183 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureFlowLowStopPumpValue",
+      "name": "流量低停泵值",
+      "enabled": true,
+      "address": [ 182, 183 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureLossDetectionDelay",
+      "name": "失压检测延时",
+      "enabled": true,
+      "address": [ 268, 269 ],
+      "data_type": "uint32",
+      "unit": "s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureLossValue",
+      "name": "失压检测压力",
+      "enabled": true,
+      "address": [ 270, 271 ],
+      "data_type": "float32",
+      "unit": "s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureRehydrationLevel",
+      "name": "补液液位",
+      "enabled": true,
+      "address": [ 278, 279 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureSetPressure",
+      "name": "联控_设定压力",
+      "enabled": true,
+      "address": [ 280, 281 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureDetectionTime",
+      "name": "联控_压力检测时间",
+      "enabled": true,
+      "address": [ 282, 283 ],
+      "data_type": "uint32",
+      "unit": "s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressurePumpSwitchingTime",
+      "name": "联控_泵切换时间",
+      "enabled": true,
+      "address": [ 284, 285 ],
+      "data_type": "uint32",
+      "unit": "s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressurePumpSwitchingMode",
+      "name": "联控_泵切换模式",
+      "enabled": true,
+      "address": [ 286 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "顺序",
+        "1": "倒序"
+      }
+    },
+    {
+      "code": "HydraulicPressurePumpSelect",
+      "name": "联控_泵选用",
+      "enabled": true,
+      "address": [ 287 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "pump01Main",
+          "name": "乳化泵1主泵"
+        },
+        "1": {
+          "code": "pump02Main",
+          "name": "乳化泵2主泵"
+        },
+        "2": {
+          "code": "pump03Main",
+          "name": "乳化泵3主泵"
+        },
+        "3": {
+          "code": "pump04Main",
+          "name": "乳化泵4主泵"
+        },
+        "4": {
+          "code": "pump05Main",
+          "name": "乳化泵5主泵"
+        },
+        "8": {
+          "code": "pump01Select",
+          "name": "乳化泵1选用"
+        },
+        "9": {
+          "code": "pump02Select",
+          "name": "乳化泵2选用"
+        },
+        "10": {
+          "code": "pump03Select",
+          "name": "乳化泵3选用"
+        },
+        "11": {
+          "code": "pump04Select",
+          "name": "乳化泵4选用"
+        },
+        "12": {
+          "code": "pump05Select",
+          "name": "乳化泵5选用"
+        }
+      }
+    },
+    {
+      "code": "HydraulicPressurePoorWorkPressure",
+      "name": "工作压力下差",
+      "enabled": true,
+      "address": [ 291, 292 ],
+      "data_type": "float32",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureMinimumStartPumpNumber",
+      "name": "泵最少启动台数",
+      "enabled": true,
+      "address": [ 293 ],
+      "data_type": "uint16",
+      "unit": "台",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureMainPipelineOpenPressure",
+      "name": "总管路泄压阀开压力",
+      "enabled": true,
+      "address": [ 294, 295 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureMainPipelineClosePressure",
+      "name": "总管路泄压阀关压力",
+      "enabled": true,
+      "address": [ 296, 297 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    },
+    {
+      "code": "HydraulicPressureFlowLowStopPumpTime",
+      "name": "流量低停泵时间",
+      "enabled": true,
+      "address": [ 298 ],
+      "data_type": "uint16",
+      "unit": "s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false
+    }
+  ]
+}

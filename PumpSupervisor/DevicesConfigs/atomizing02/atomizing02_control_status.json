@@ -1,0 +1,79 @@
+{
+  "id": "atomizing02_control_status",
+  "name": "喷雾泵2控制状态",
+  "poll_mode": "on_demand",
+  "description": "喷雾泵2控制状态，写之前需要读取其值",
+  "read_blocks": [
+    {
+      "start": 380,
+      "count": 7,
+      "comment": "喷雾泵2启停控制 (地址 380-386)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "atomizing02_pump_start",
+      "name": "喷雾泵2泵启动",
+      "enabled": true,
+      "address": [ 380 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "0": "关",
+        "1": "开"
+      }
+    },
+    {
+      "code": "atomizing02_pump_stop",
+      "name": "喷雾泵2泵停止",
+      "enabled": true,
+      "address": [ 381 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "0": "关",
+        "1": "开"
+      }
+    },
+    {
+      "code": "atomizing02_valve_switch",
+      "name": "喷雾泵2泄压阀",
+      "enabled": true,
+      "address": [ 382 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "0": "关",
+        "1": "开"
+      }
+    },
+    {
+      "code": "atomizing02_parameter_saving",
+      "name": "喷雾泵2参数保存",
+      "enabled": true,
+      "address": [ 386 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "1": "保存参数",
+        "2": "读取参数"
+      }
+    }
+  ]
+}

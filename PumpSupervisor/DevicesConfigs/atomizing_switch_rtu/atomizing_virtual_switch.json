@@ -1,0 +1,134 @@
+{
+  "id": "atomizing_virtual_switch",
+  "name": "喷雾泵组开关",
+  "poll_mode": "continuous",
+  "read_blocks": [
+    {
+      "start": 0,
+      "count": 12,
+      "comment": "系统级控制 (地址 0-11)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "atomizingPumpGroupStartStop",
+      "name": "集控_喷雾系统_启动/停止",
+      "enabled": true,
+      "address": [ 0 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizingPumpEmergencyStop",
+      "name": "集控_喷雾泵急停",
+      "enabled": true,
+      "address": [ 1 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsionPumpGroupAutomatic",
+      "name": "乳化集控_自动_手动",
+      "enabled": true,
+      "address": [ 2 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizingPumpGroupAutomatic",
+      "name": "喷雾集控_自动_手动",
+      "enabled": true,
+      "address": [ 3 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizing01ManualSwitch",
+      "name": "手动启停喷雾泵1",
+      "enabled": true,
+      "address": [ 4 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizing02ManualSwitch",
+      "name": "手动启停喷雾泵2",
+      "enabled": true,
+      "address": [ 5 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizing03ManualSwitch",
+      "name": "手动启停喷雾泵3",
+      "enabled": true,
+      "address": [ 6 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizing01ValveSwitch",
+      "name": "手动开关乳化泵加水阀1",
+      "enabled": true,
+      "address": [ 7 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizing02ValveSwitch",
+      "name": "手动开关乳化泵加水阀2",
+      "enabled": true,
+      "address": [ 8 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "atomizing03ValveSwitch",
+      "name": "手动开关乳化泵加水阀3",
+      "enabled": true,
+      "address": [ 9 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    }
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "id": "atomizing03_parameter_settings",
+  "name": "喷雾泵3参数设置",
+  "poll_mode": "on_demand",
+  "description": "喷雾泵3参数设置，写之前需要读取其值",
+  "read_blocks": [
+    {
+      "start": 724,
+      "count": 51,
+      "comment": "喷雾泵3参数 (地址 724-774)"
+    },
+    {
+      "start": 784,
+      "count": 43,
+      "comment": "喷雾泵3参数 (地址 784-826)"
+    },
+    {
+      "start": 872,
+      "count": 17,
+      "comment": "喷雾泵3参数 (地址 872-888)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "EAtomizing3OutPressureUpperLimit",
+      "name": "出口压力上限",
+      "enabled": true,
+      "address": [ 724, 725 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3OutPressureLowerLimit",
+      "name": "出口压力下限",
+      "enabled": true,
+      "address": [ 726, 727 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3LubricatingOilPressureUpperLimit",
+      "name": "润滑油压力上限",
+      "enabled": true,
+      "address": [ 736, 737 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3LubricatingOilPressureLowerLimit",
+      "name": "润滑油压力下限",
+      "enabled": true,
+      "address": [ 738, 739 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3LubricatingOilPressureLowWarning",
+      "name": "润滑油压力低预警",
+      "enabled": true,
+      "address": [ 744, 745 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3LubricatingOilPressureLowAlarm",
+      "name": "润滑油压力低报警",
+      "enabled": true,
+      "address": [ 746, 747 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxOilLevelUpperLimit",
+      "name": "曲轴箱油位上限",
+      "enabled": true,
+      "address": [ 748, 749 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxOilLevelLowerLimit",
+      "name": "曲轴箱油位下限",
+      "enabled": true,
+      "address": [ 750, 751 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxOilLevelLowerwarning",
+      "name": "曲轴箱油位低预警",
+      "enabled": true,
+      "address": [ 756, 757 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxOilLevelLowerAlarm",
+      "name": "曲轴箱油位低报警",
+      "enabled": true,
+      "address": [ 758, 759 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxTemperatureUpperLimit",
+      "name": "曲轴箱温度上限",
+      "enabled": true,
+      "address": [ 760, 761 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxTemperatureLowerLimit",
+      "name": "曲轴箱温度下限",
+      "enabled": true,
+      "address": [ 762, 763 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxTemperatureAlarm",
+      "name": "曲轴箱温度高报警",
+      "enabled": true,
+      "address": [ 764, 765 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3CrankshaftBoxTemperatureWarning",
+      "name": "曲轴箱温度高预警",
+      "enabled": true,
+      "address": [ 766, 767 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3TotalFlowUpperLimit",
+      "name": "总流量上限",
+      "enabled": true,
+      "address": [ 772, 773 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3TotalFlowLowerLimit",
+      "name": "总流量下限",
+      "enabled": true,
+      "address": [ 774, 775 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3PipeFlowUpperLimit",
+      "name": "分管流量上限",
+      "enabled": true,
+      "address": [ 784, 785 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3PipeFlowLowerLimit",
+      "name": "分管流量下限",
+      "enabled": true,
+      "address": [ 786, 787 ],
+      "data_type": "float32",
+      "unit": "m^3/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3MotorTemperatureUpperLimit",
+      "name": "电动机温度上限",
+      "enabled": true,
+      "address": [ 796, 797 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3MotorTemperatureLowerLimit",
+      "name": "电动机温度下限",
+      "enabled": true,
+      "address": [ 798, 799 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3MotorTemperatureAlarm",
+      "name": "电动机温度高报警",
+      "enabled": true,
+      "address": [ 800, 801 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3MotorTemperatureWarning",
+      "name": "电动机温度高预警",
+      "enabled": true,
+      "address": [ 802, 803 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3BeforeShaftTempertureUpperLimit",
+      "name": "前轴温度上限",
+      "enabled": true,
+      "address": [ 808, 809 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3BeforeShaftTempertureLowerLimit",
+      "name": "前轴温度下限",
+      "enabled": true,
+      "address": [ 810, 811 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3BeforeShaftTempertureHighAlarm",
+      "name": "前轴温度高报警",
+      "enabled": true,
+      "address": [ 812, 813 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3BeforeShaftTempertureHighWarning",
+      "name": "前轴温度高预警",
+      "enabled": true,
+      "address": [ 814, 815 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3AfterShaftTempertureUpperLimit",
+      "name": "后轴温度上限",
+      "enabled": true,
+      "address": [ 820, 821 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3AfterShaftTempertureLowerLimit",
+      "name": "后轴温度下限",
+      "enabled": true,
+      "address": [ 822, 823 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3AfterShaftTempertureHighAlarm",
+      "name": "后轴温度高报警",
+      "enabled": true,
+      "address": [ 824, 825 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3AfterShaftTempertureHighWarning",
+      "name": "后轴温度高预警",
+      "enabled": true,
+      "address": [ 826, 827 ],
+      "data_type": "float32",
+      "unit": "℃",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3StartMaximumPressure",
+      "name": "泵启动最高压力",
+      "enabled": true,
+      "address": [ 872, 873 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3PressureValveOpenValue",
+      "name": "泄压阀开启值",
+      "enabled": true,
+      "address": [ 874, 875 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3PressureValveCloseValue",
+      "name": "泄压阀关闭值",
+      "enabled": true,
+      "address": [ 876, 877 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "Atomizing3SensorSwitch",
+      "name": "集控传感器开关",
+      "enabled": true,
+      "address": [ 888 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "Atomizing3EnableParametersMotorTemperature",
+          "name": "电机温度传感器开关"
+        },
+        "1": {
+          "code": "Atomizing3EnableParametersBeforeShaftTemperture",
+          "name": "前轴端温度传感器开关"
+        },
+        "2": {
+          "code": "Atomizing3EnableParametersAfterShaftTemperture",
+          "name": "后轴端温度传感器开关"
+        },
+        "4": {
+          "code": "Atomizing3EnableParametersEnvironmentHumidness",
+          "name": "电箱温湿度传感器开关"
+        },
+        "10": {
+          "code": "Atomizing3EnableParametersOutPressure",
+          "name": "出口压力传感器开关"
+        },
+        "11": {
+          "code": "Atomizing3EnableParametersLubricatingOilPressure",
+          "name": "润滑油压力传感器开关"
+        },
+        "12": {
+          "code": "Atomizing3EnableParametersCrankshaftBoxOilLevel",
+          "name": "曲轴箱油位传感器开关"
+        },
+        "13": {
+          "code": "Atomizing3EnableParametersCrankshaftBoxTemperature",
+          "name": "曲轴箱温度传感器开关"
+        },
+        "15": {
+          "code": "Atomizing3EnableParametersPipeFlow",
+          "name": "分管流量传感器开关"
+        }
+      }
+    }
+  ]
+}

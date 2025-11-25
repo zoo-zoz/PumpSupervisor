@@ -1,0 +1,158 @@
+{
+  "id": "emulsion_virtual_switch",
+  "name": "乳化泵组开关",
+  "poll_mode": "continuous",
+  "read_blocks": [
+    {
+      "start": 0,
+      "count": 12,
+      "comment": "系统级控制 (地址 0-11)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "emulsionPumpGroupStartStop",
+      "name": "集控_乳化系统_启动/停止",
+      "enabled": true,
+      "address": [ 0 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsionPumpEmergencyStop",
+      "name": "集控_乳化泵急停",
+      "enabled": true,
+      "address": [ 1 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion01ManualSwitch",
+      "name": "手动启停乳化泵1",
+      "enabled": true,
+      "address": [ 2 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion02ManualSwitch",
+      "name": "手动启停乳化泵2",
+      "enabled": true,
+      "address": [ 3 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion03ManualSwitch",
+      "name": "手动启停乳化泵3",
+      "enabled": true,
+      "address": [ 4 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion04ManualSwitch",
+      "name": "手动启停乳化泵4",
+      "enabled": true,
+      "address": [ 5 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion05ManualSwitch",
+      "name": "手动启停乳化泵5",
+      "enabled": true,
+      "address": [ 6 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion01ValveSwitch",
+      "name": "手动开关乳化泵卸载阀1",
+      "enabled": true,
+      "address": [ 7 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion02ValveSwitch",
+      "name": "手动开关乳化泵卸载阀2",
+      "enabled": true,
+      "address": [ 8 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion03ValveSwitch",
+      "name": "手动开关乳化泵卸载阀3",
+      "enabled": true,
+      "address": [ 9 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion04ValveSwitch",
+      "name": "手动开关乳化泵卸载阀4",
+      "enabled": true,
+      "address": [ 10 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    },
+    {
+      "code": "emulsion05ValveSwitch",
+      "name": "手动开关乳化泵卸载阀5",
+      "enabled": true,
+      "address": [ 11 ],
+      "data_type": "bit",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true
+    }
+  ]
+}

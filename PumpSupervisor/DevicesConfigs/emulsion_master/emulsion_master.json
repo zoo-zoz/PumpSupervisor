@@ -1,0 +1,170 @@
+{
+  "id": "emulsion_master",
+  "name": "乳化泵主站设备",
+  "poll_mode": "periodic",
+  "description": "监控乳化系统压力、液位、流量等主要参数",
+  "read_blocks": [
+    {
+      "start": 0,
+      "count": 38,
+      "comment": "主要参数和报警状态 (地址 0-37)"
+    },
+    {
+      "start": 1502,
+      "count": 3,
+      "comment": "乳化系统连接状态和联控启停 (地址 1502-1504)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "emulsionMasterHydraulicPressure",
+      "name": "乳化系统压力",
+      "enabled": true,
+      "address": [ 0, 1 ],
+      "data_type": "float32",
+      "unit": "MPa",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "emulsionMasterLiquidBoxLevel",
+      "name": "乳化箱液位",
+      "enabled": true,
+      "address": [ 2, 3 ],
+      "data_type": "float32",
+      "unit": "mm",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "range": {
+        "min": 0,
+        "max": 2000
+      },
+      "on_change": false
+    },
+    {
+      "code": "emulsionMasterFlowRate",
+      "name": "液压总流量",
+      "enabled": true,
+      "address": [ 12, 13 ],
+      "data_type": "float32",
+      "unit": "m³/s",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false
+    },
+    {
+      "code": "emulsionMasterPressureWarningState",
+      "name": "乳化系统_压力报警状态",
+      "enabled": true,
+      "address": [ 36 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsionMasterPressureAlarm_HighAlarm",
+          "name": "压力高报警",
+          "description": "压力超过高限报警值"
+        },
+        "1": {
+          "code": "emulsionMasterPressureAlarm_HighWarning",
+          "name": "压力高预警",
+          "description": "压力接近高限预警值"
+        },
+        "2": {
+          "code": "emulsionMasterPressureAlarm_LowWarning",
+          "name": "压力低预警",
+          "description": "压力接近低限预警值"
+        },
+        "3": {
+          "code": "emulsionMasterPressureAlarm_LowAlarm",
+          "name": "压力低报警",
+          "description": "压力低于低限报警值"
+        }
+      }
+    },
+    {
+      "code": "emulsionMasterWaterBoxLevelWarningState",
+      "name": "乳化液箱_液位报警状态",
+      "enabled": true,
+      "address": [ 37 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": true,
+      "bit_map": {
+        "0": {
+          "code": "emulsionMasterWaterBoxLevel_HighAlarm",
+          "name": "液位高报警"
+        },
+        "1": {
+          "code": "emulsionMasterWaterBoxLevel_HighWarning",
+          "name": "液位高预警"
+        },
+        "2": {
+          "code": "emulsionMasterWaterBoxLevel_LowWarning",
+          "name": "液位低预警"
+        },
+        "3": {
+          "code": "emulsionMasterWaterBoxLevel_LowAlarm",
+          "name": "液位低报警"
+        }
+      }
+    },
+    {
+      "code": "emulsionMaster_substation_connection_status",
+      "name": "乳化系统_子站连接状态",
+      "enabled": true,
+      "address": [ 1502 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "bit_map": {
+        "0": {
+          "code": "emulsionMaster_substation2_connection_status",
+          "name": "子站2连接状态"
+        },
+        "1": {
+          "code": "emulsionMaster_substation3_connection_status",
+          "name": "子站3连接状态"
+        },
+        "2": {
+          "code": "emulsionMaster_substation4_connection_status",
+          "name": "子站4连接状态"
+        },
+        "3": {
+          "code": "emulsionMaster_substation5_connection_status",
+          "name": "子站5连接状态"
+        }
+      }
+    },
+    {
+      "code": "emulsionMaster_jointControl_status",
+      "name": "乳化系统_联控启停状态",
+      "enabled": true,
+      "address": [ 1504 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 0,
+      "on_change": false,
+      "enum_map": {
+        "0": "停止",
+        "1": "启动"
+      }
+    }
+  ]
+}

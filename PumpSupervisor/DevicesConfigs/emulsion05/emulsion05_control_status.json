@@ -1,0 +1,79 @@
+{
+  "id": "emulsion05_control_status",
+  "name": "乳化泵5控制状态",
+  "poll_mode": "on_demand",
+  "description": "乳化泵5控制状态，写之前需要读取其值",
+  "read_blocks": [
+    {
+      "start": 1280,
+      "count": 7,
+      "comment": "乳化泵5启停控制 (地址 1280-1286)"
+    }
+  ],
+  "parameters": [
+    {
+      "code": "emulsion05_pump_start",
+      "name": "乳化泵5泵启动",
+      "enabled": true,
+      "address": [ 1280 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "0": "关",
+        "1": "开"
+      }
+    },
+    {
+      "code": "emulsion05_pump_stop",
+      "name": "乳化泵5泵停止",
+      "enabled": true,
+      "address": [ 1281 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "0": "关",
+        "1": "开"
+      }
+    },
+    {
+      "code": "emulsion05_valve_switch",
+      "name": "乳化泵5泄压阀",
+      "enabled": true,
+      "address": [ 1282 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "0": "关",
+        "1": "开"
+      }
+    },
+    {
+      "code": "emulsion05_parameter_saving",
+      "name": "乳化泵5参数保存",
+      "enabled": true,
+      "address": [ 1286 ],
+      "data_type": "uint16",
+      "unit": "",
+      "scale": 1.0,
+      "offset": 0.0,
+      "precision": 2,
+      "on_change": false,
+      "enum_map": {
+        "1": "保存参数",
+        "2": "读取参数"
+      }
+    }
+  ]
+}
