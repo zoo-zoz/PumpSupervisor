@@ -305,7 +305,7 @@ namespace PumpSupervisor
                 options.Protocol = otlpProtocol;
             });
 
-            Log.Information("✓ 已启用 OTLP Metrics 导出: {Endpoint} (协议: {Protocol})",
+            Log.Information("✓已启用 OTLP Metrics 导出: {Endpoint} (协议: {Protocol})",
                 endpoint, otlpProtocol);
         }
     }
