@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using PumpSupervisor.Domain.Models;
-using System.Text.Json;
+using PumpSupervisor.Infrastructure.Configuration;
 
 namespace PumpSupervisor.Infrastructure.Cache
 {
@@ -20,15 +20,18 @@ namespace PumpSupervisor.Infrastructure.Cache
     {
         private readonly IMemoryCache _cache;
         private readonly ILogger<ModbusConfigCacheService> _logger;
+        private readonly IModbusConfigLoader _configLoader;
         private const string CacheKey = "ModbusConfig";
         private readonly string _configPath;
 
         public ModbusConfigCacheService(
             IMemoryCache cache,
-            ILogger<ModbusConfigCacheService> logger)
+            ILogger<ModbusConfigCacheService> logger,
+            IModbusConfigLoader configLoader)
         {
             _cache = cache;
             _logger = logger;
+            _configLoader = configLoader;
             _configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "readModbus.json");
         }
 
@@ -53,13 +56,10 @@ namespace PumpSupervisor.Infrastructure.Cache
                     return;
                 }
 
-                var json = await File.ReadAllTextAsync(_configPath);
-                var config = JsonSerializer.Deserialize<ModbusConfig>(json, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    ReadCommentHandling = JsonCommentHandling.Skip,
-                    AllowTrailingCommas = true
-                });
+                _logger.LogInformation("🔄 开始刷新配置缓存...");
+
+                // 使用配置加载器 (支持外部文件合并)
+                var config = await _configLoader.LoadConfigAsync(_configPath);
 
                 if (config != null)
                 {
@@ -69,12 +69,20 @@ namespace PumpSupervisor.Infrastructure.Cache
                         .SetPriority(CacheItemPriority.High);
 
                     _cache.Set(CacheKey, config, cacheOptions);
-                    _logger.LogInformation("配置已缓存,连接数: {Count}", config.Connections?.Count ?? 0);
+
+                    _logger.LogInformation(
+                        "✅ 配置已缓存: Connections={ConnectionCount}, AutoCreate={AutoCreateCount}",
+                        config.Connections?.Count ?? 0,
+                        config.AutoCreateDevices?.Count ?? 0);
+                }
+                else
+                {
+                    _logger.LogWarning("⚠️ 配置加载结果为 null");
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "刷新配置缓存失败");
+                _logger.LogError(ex, "❌ 刷新配置缓存失败");
                 throw;
             }
         }

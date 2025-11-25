@@ -2,11 +2,11 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PumpSupervisor.Domain.Models;
+using PumpSupervisor.Infrastructure.Configuration;
 using PumpSupervisor.Infrastructure.Modbus;
 using PumpSupervisor.Infrastructure.Modbus.Commands;
 using PumpSupervisor.Infrastructure.Storage.ModbusSlave;
 using System.Collections.Concurrent;
-using System.Text.Json;
 using Wolverine;
 
 namespace PumpSupervisor.Application.Services
@@ -17,6 +17,7 @@ namespace PumpSupervisor.Application.Services
         private readonly IMessageBus _messageBus;
         private readonly IConfiguration _configuration;
         private readonly IModbusConnectionManager _connectionManager;
+        private readonly IModbusConfigLoader _configLoader;
         private readonly ConcurrentDictionary<string, Timer> _timers = new();
         private readonly ConcurrentDictionary<string, Task> _continuousTasks = new();
         private readonly ConcurrentDictionary<string, CancellationTokenSource> _continuousCts = new();
@@ -28,20 +29,22 @@ namespace PumpSupervisor.Application.Services
             IMessageBus messageBus,
             IConfiguration configuration,
             IModbusConnectionManager connectionManager,
-            ModbusTcpSlaveService slaveService)
+            ModbusTcpSlaveService slaveService,
+            IModbusConfigLoader configLoader)
         {
             _logger = logger;
             _messageBus = messageBus;
             _configuration = configuration;
             _connectionManager = connectionManager;
             _slaveService = slaveService;
+            _configLoader = configLoader;
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("ModbusPollingService 正在启动...");
 
-            await LoadConfigurationAsync();
+            await LoadConfigurationAsync(); // 🔧 修改加载方式
             _logger.LogInformation("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             _logger.LogInformation("注册设备连接列表:");
 
@@ -127,6 +130,10 @@ namespace PumpSupervisor.Application.Services
             {
                 foreach (var device in connection.Devices.Where(d => d.Enabled))
                 {
+                    // 🔧 调试日志 - 打印每个设备的 poll_mode
+                    _logger.LogDebug("设备 {ConnectionId}/{DeviceId}: PollMode={PollMode}",
+                        connection.Id, device.Id, device.PollMode ?? "null");
+
                     switch (device.PollMode?.ToLower())
                     {
                         case "continuous":
@@ -229,7 +236,6 @@ namespace PumpSupervisor.Application.Services
                         {
                             await Task.Delay(minPollInterval, cts.Token);
                         }
-                        // 如果设置为0，则立即进行下一次采集（真正的连续模式）
                     }
                     catch (OperationCanceledException)
                     {
@@ -335,6 +341,9 @@ namespace PumpSupervisor.Application.Services
                 connection.Id, device.Id, interval);
         }
 
+        /// <summary>
+        /// 🔧 修改加载方式 - 使用配置加载器支持外部文件
+        /// </summary>
         private async Task LoadConfigurationAsync()
         {
             try
@@ -347,17 +356,15 @@ namespace PumpSupervisor.Application.Services
                     throw new FileNotFoundException($"配置文件不存在: {configPath}");
                 }
 
-                var json = await File.ReadAllTextAsync(configPath);
+                _logger.LogInformation("📖 使用配置加载器加载配置 (支持外部文件)...");
 
-                var config = JsonSerializer.Deserialize<ModbusConfig>(json, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+                var config = await _configLoader.LoadConfigAsync(configPath);
 
                 _connectionConfigs = config?.Connections ?? new List<ModbusConnectionConfig>();
 
-                _logger.LogInformation("加载配置成功，连接数: {Count}", _connectionConfigs.Count);
+                _logger.LogInformation("✅ 加载配置成功，连接数: {Count}", _connectionConfigs.Count);
 
+                // 🔧 调试日志 - 打印每个连接的设备数和 poll_mode
                 foreach (var conn in _connectionConfigs.Where(c => c.Enabled))
                 {
                     _logger.LogDebug("连接 {ConnectionId}: Type={Type}, SlaveId={SlaveId}, PollInterval={PollInterval}, MinPollInterval={MinInterval}ms",
@@ -365,14 +372,14 @@ namespace PumpSupervisor.Application.Services
 
                     foreach (var device in conn.Devices.Where(d => d.Enabled))
                     {
-                        _logger.LogDebug("  设备 {DeviceId}: PollMode={PollMode}, ReadBlocks={BlockCount}",
-                            device.Id, device.PollMode ?? "periodic", device.ReadBlocks.Count);
+                        _logger.LogDebug("  设备 {DeviceId}: PollMode={PollMode}, ReadBlocks={BlockCount}, Parameters={ParamCount}",
+                            device.Id, device.PollMode ?? "null", device.ReadBlocks.Count, device.Parameters.Count);
                     }
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "加载Modbus配置失败");
+                _logger.LogError(ex, "❌ 加载Modbus配置失败");
                 throw;
             }
         }

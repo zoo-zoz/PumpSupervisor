@@ -61,11 +61,23 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
 
             try
             {
-                var configs = await LoadConnectionConfigsAsync();
+                var config = await LoadConnectionConfigAsync();
 
-                _logger.LogInformation("📋 加载配置完成，连接总数: {Total}", configs.Count);
+                _logger.LogInformation("📋 加载配置完成，连接总数: {Total}",
+                    config.Connections?.Count ?? 0);
 
-                var enabledConfigs = configs.Where(c => c.Enabled).ToList();
+                // ========== 🆕 第一步: 处理 autoCreateDevices ==========
+                if (config.AutoCreateDevices != null && config.AutoCreateDevices.Count > 0)
+                {
+                    _logger.LogInformation("🔧 开始创建自动设备 (autoCreateDevices): {Count} 个",
+                        config.AutoCreateDevices.Count);
+
+                    await CreateAutoDevicesAsync(config.AutoCreateDevices, cancellationToken);
+                }
+                // =====================================================
+
+                var enabledConfigs = config.Connections?.Where(c => c.Enabled).ToList()
+                    ?? new List<ModbusConnectionConfig>();
 
                 if (enabledConfigs.Count == 0)
                 {
@@ -85,20 +97,20 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
                 var usedPorts = new HashSet<int>();
                 int successCount = 0;
 
-                foreach (var config in enabledConfigs)
+                foreach (var connectionConfig in enabledConfigs)
                 {
                     try
                     {
-                        _logger.LogInformation("🔧 开始创建Slave: {ConnectionId}", config.Id);
+                        _logger.LogInformation("🔧 开始创建Slave: {ConnectionId}", connectionConfig.Id);
 
                         // 确定要使用的端口
-                        int slavePort = DetermineSlavePort(config, usedPorts);
+                        int slavePort = DetermineSlavePort(connectionConfig, usedPorts);
 
                         if (slavePort <= 0)
                         {
                             _logger.LogError(
                                 "❌ 无法为连接分配端口: ConnectionId={ConnectionId}",
-                                config.Id);
+                                connectionConfig.Id);
                             continue;
                         }
 
@@ -109,7 +121,7 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
                         {
                             _logger.LogError(
                                 "❌ 端口冲突: ConnectionId={ConnectionId}, Port={Port} 已被占用",
-                                config.Id, slavePort);
+                                connectionConfig.Id, slavePort);
                             continue;
                         }
 
@@ -117,9 +129,9 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
 
                         // 创建 Slave 实例
                         var slaveInstance = new ModbusTcpSlaveInstance(
-                            config.Id,
+                            connectionConfig.Id,
                             slavePort,
-                            (byte)config.SlaveId,
+                            (byte)connectionConfig.SlaveId,
                             _logger);
 
                         _logger.LogDebug("  实例已创建,准备启动...");
@@ -128,16 +140,16 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
 
                         _logger.LogDebug("  实例启动完成,添加到字典...");
 
-                        _slaveInstances[config.Id] = slaveInstance;
+                        _slaveInstances[connectionConfig.Id] = slaveInstance;
                         usedPorts.Add(slavePort);
                         successCount++;
 
                         _logger.LogInformation(
                             "✅ Slave已创建: Id={ConnectionId,-30} | Type={Type,-4} | Port={Port,-5} | SlaveId={SlaveId}",
-                            config.Id, config.Type, slavePort, config.SlaveId);
+                            connectionConfig.Id, connectionConfig.Type, slavePort, connectionConfig.SlaveId);
 
                         // 验证是否真的添加成功
-                        if (_slaveInstances.ContainsKey(config.Id))
+                        if (_slaveInstances.ContainsKey(connectionConfig.Id))
                         {
                             _logger.LogDebug("  ✓ 验证通过: 实例已在字典中");
                         }
@@ -148,7 +160,8 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogError(ex, "❌ 创建 Slave 失败: ConnectionId={ConnectionId}", config.Id);
+                        _logger.LogError(ex, "❌ 创建 Slave 失败: ConnectionId={ConnectionId}",
+                            connectionConfig.Id);
                         _logger.LogError("异常详情: {Message}", ex.ToString());
                     }
                 }
@@ -189,6 +202,71 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
             }
 
             await base.StartAsync(cancellationToken);
+        }
+
+        /// <summary>
+        ///创建自动设备 (autoCreateDevices)
+        /// </summary>
+        private async Task CreateAutoDevicesAsync(
+            List<AutoCreateDeviceConfig> autoDevices,
+            CancellationToken cancellationToken)
+        {
+            var usedPorts = new HashSet<int>();
+
+            foreach (var autoDevice in autoDevices.Where(d => d.Enabled))
+            {
+                try
+                {
+                    if (autoDevice.Type.ToUpper() != "TCP")
+                    {
+                        _logger.LogWarning("⚠️ 自动创建设备仅支持 TCP 类型: {Id} (Type={Type})",
+                            autoDevice.Id, autoDevice.Type);
+                        continue;
+                    }
+
+                    if (autoDevice.Connection?.Port == null)
+                    {
+                        _logger.LogError("❌ 自动创建设备缺少端口配置: {Id}", autoDevice.Id);
+                        continue;
+                    }
+
+                    int port = autoDevice.Connection.Port.Value;
+
+                    // 检查端口是否已被占用
+                    if (usedPorts.Contains(port) || !IsPortAvailable(port))
+                    {
+                        _logger.LogError(
+                            "❌ 端口占用,跳过创建: {Id}, Port={Port}",
+                            autoDevice.Id, port);
+                        continue;
+                    }
+
+                    _logger.LogInformation("🔧 创建自动设备: {Id} @ 127.0.0.1:{Port} (SlaveId={SlaveId})",
+                        autoDevice.Id, port, autoDevice.SlaveId);
+
+                    var slaveInstance = new ModbusTcpSlaveInstance(
+                        autoDevice.Id,
+                        port,
+                        (byte)autoDevice.SlaveId,
+                        _logger);
+
+                    await slaveInstance.StartAsync(cancellationToken);
+
+                    _slaveInstances[autoDevice.Id] = slaveInstance;
+                    usedPorts.Add(port);
+
+                    _logger.LogInformation("✅ 自动设备已创建: {Id} @ 127.0.0.1:{Port}",
+                        autoDevice.Id, port);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "❌ 创建自动设备失败: {Id}", autoDevice.Id);
+                    // 不抛出异常,继续创建下一个
+                }
+            }
+
+            _logger.LogInformation("✅ 自动设备创建完成: 成功={Success}/{Total}",
+                usedPorts.Count, autoDevices.Count(d => d.Enabled));
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -386,7 +464,7 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
                 .ToList();
         }
 
-        private async Task<List<ModbusConnectionConfig>> LoadConnectionConfigsAsync()
+        private async Task<ModbusConfig> LoadConnectionConfigAsync()
         {
             try
             {
@@ -397,7 +475,7 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
                 if (!File.Exists(configPath))
                 {
                     _logger.LogError("❌ 配置文件不存在: {Path}", configPath);
-                    return new List<ModbusConnectionConfig>();
+                    return new ModbusConfig();
                 }
 
                 _logger.LogInformation("✓ 配置文件存在，开始读取...");
@@ -416,24 +494,31 @@ namespace PumpSupervisor.Infrastructure.Storage.ModbusSlave
                 if (config == null)
                 {
                     _logger.LogError("❌ 配置反序列化结果为null");
-                    return new List<ModbusConnectionConfig>();
+                    return new ModbusConfig();
                 }
 
                 if (config.Connections == null)
                 {
-                    _logger.LogError("❌ 配置中没有connections节点");
-                    return new List<ModbusConnectionConfig>();
+                    _logger.LogWarning("⚠️ 配置中没有connections节点");
+                    config.Connections = new List<ModbusConnectionConfig>();
                 }
 
-                _logger.LogInformation("✓ 配置解析成功，连接数: {Count}", config.Connections.Count);
+                if (config.AutoCreateDevices == null)
+                {
+                    _logger.LogDebug("配置中没有autoCreateDevices节点");
+                    config.AutoCreateDevices = new List<AutoCreateDeviceConfig>();
+                }
 
-                return config.Connections;
+                _logger.LogInformation("✓ 配置解析成功: Connections={ConnCount}, AutoCreate={AutoCount}",
+                    config.Connections.Count, config.AutoCreateDevices.Count);
+
+                return config;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "❌ 加载连接配置失败");
                 _logger.LogError("异常详情: {Message}", ex.ToString());
-                return new List<ModbusConnectionConfig>();
+                return new ModbusConfig();
             }
         }
 

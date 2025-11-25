@@ -94,14 +94,14 @@ namespace PumpSupervisor.Domain.Models
         public bool Enabled { get; set; }
 
         /// <summary>
-        /// 轮询模式:
-        /// - "periodic": 周期性轮询（使用 poll_interval）
-        /// - "continuous": 连续轮询（使用 min_poll_interval）
-        /// - "on-demand": 按需轮询（不自动轮询）
+        /// 外部配置文件路径 (相对于 exe 根目录)
+        /// 如果配置了 path,则从外部文件加载 poll_mode, read_blocks, parameters
         /// </summary>
+        [JsonPropertyName("path")]
+        public string? Path { get; set; }
 
         [JsonPropertyName("poll_mode")]
-        public string PollMode { get; set; } = string.Empty; // periodic or on_demand
+        public string PollMode { get; set; } = string.Empty;
 
         [JsonPropertyName("description")]
         public string Description { get; set; } = string.Empty;

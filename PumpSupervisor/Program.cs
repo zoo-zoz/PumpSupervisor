@@ -8,6 +8,7 @@ using OpenTelemetry.Trace;
 using PumpSupervisor.API;
 using PumpSupervisor.Application.Services;
 using PumpSupervisor.Infrastructure.Cache;
+using PumpSupervisor.Infrastructure.Configuration;
 using PumpSupervisor.Infrastructure.Messaging.Mqtt;
 using PumpSupervisor.Infrastructure.Modbus;
 using PumpSupervisor.Infrastructure.Modbus.DataParser;
@@ -91,6 +92,7 @@ namespace PumpSupervisor
                 {
                     // ========== 第一层: 基础设施服务 ==========
                     services.AddMemoryCache();
+                    services.AddSingleton<IModbusConfigLoader, ModbusConfigLoader>();
                     services.AddSingleton<IModbusConfigCacheService, ModbusConfigCacheService>();
                     services.AddSingleton<IModbusConnectionFactory, ModbusConnectionFactory>();
                     services.AddSingleton<IModbusConnectionManager, ModbusConnectionManager>();
@@ -305,7 +307,7 @@ namespace PumpSupervisor
                 options.Protocol = otlpProtocol;
             });
 
-            Log.Information("✓已启用 OTLP Metrics 导出: {Endpoint} (协议: {Protocol})",
+            Log.Information("✓ 已启用 OTLP Metrics 导出: {Endpoint} (协议: {Protocol})",
                 endpoint, otlpProtocol);
         }
     }

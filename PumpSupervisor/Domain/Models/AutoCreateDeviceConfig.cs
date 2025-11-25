@@ -2,6 +2,9 @@
 
 namespace PumpSupervisor.Domain.Models
 {
+    /// <summary>
+    /// 自动创建设备配置 - 用于启动时自动创建虚拟 Slave
+    /// </summary>
     public class AutoCreateDeviceConfig
     {
         [JsonPropertyName("id")]
@@ -24,5 +27,8 @@ namespace PumpSupervisor.Domain.Models
 
         [JsonPropertyName("byte_order")]
         public string ByteOrder { get; set; } = "ABCD";
+
+        [JsonPropertyName("slave_id")]
+        public int SlaveId { get; set; } = 1;
     }
 }
