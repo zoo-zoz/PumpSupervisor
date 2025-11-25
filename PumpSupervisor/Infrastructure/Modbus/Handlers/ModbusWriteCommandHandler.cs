@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using PumpSupervisor.Domain.Models;
+using PumpSupervisor.Infrastructure.Cache;
 using PumpSupervisor.Infrastructure.Modbus.Commands;
-using System.Text.Json;
 
 namespace PumpSupervisor.Infrastructure.Modbus.Handlers
 {
@@ -13,13 +12,16 @@ namespace PumpSupervisor.Infrastructure.Modbus.Handlers
     {
         private readonly IModbusConnectionManager _connectionManager;
         private readonly ILogger<ModbusWriteCommandHandler> _logger;
+        private readonly IModbusConfigCacheService _configCache; // ✅ 新增
 
         public ModbusWriteCommandHandler(
             IModbusConnectionManager connectionManager,
-            ILogger<ModbusWriteCommandHandler> logger)
+            ILogger<ModbusWriteCommandHandler> logger,
+            IModbusConfigCacheService configCache) // ✅ 新增
         {
             _connectionManager = connectionManager;
             _logger = logger;
+            _configCache = configCache; // ✅ 新增
         }
 
         /// <summary>
@@ -34,14 +36,15 @@ namespace PumpSupervisor.Infrastructure.Modbus.Handlers
                 _logger.LogDebug("开始处理写入命令: Connection={ConnectionId}, Address={Address}, Count={Count}",
                     command.ConnectionId, command.StartAddress, command.Values.Length);
 
-                // 1. 加载连接配置
-                var config = await LoadConnectionConfigAsync(command.ConnectionId);
+                // ========== ✅ 修改：使用缓存服务加载配置 ==========
+                var config = await _configCache.GetConnectionConfigAsync(command.ConnectionId);
                 if (config == null)
                 {
                     var errorMsg = $"找不到连接配置: {command.ConnectionId}";
                     _logger.LogError(errorMsg);
                     return new ModbusCommandResult(false, errorMsg);
                 }
+                // ===================================================
 
                 // 2. 通过连接管理器获取连接（自动处理连接复用）
                 var connection = await _connectionManager.GetConnectionAsync(
@@ -82,43 +85,6 @@ namespace PumpSupervisor.Infrastructure.Modbus.Handlers
                     command.ConnectionId, command.StartAddress);
 
                 return new ModbusCommandResult(false, $"写入失败: {ex.Message}");
-            }
-        }
-
-        /// <summary>
-        /// 从配置文件加载指定的连接配置
-        /// </summary>
-        private async Task<ModbusConnectionConfig?> LoadConnectionConfigAsync(string connectionId)
-        {
-            try
-            {
-                var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "readModbus.json");
-                if (!File.Exists(configPath))
-                {
-                    _logger.LogError("配置文件不存在: {Path}", configPath);
-                    return null;
-                }
-
-                var json = await File.ReadAllTextAsync(configPath);
-
-                var config = JsonSerializer.Deserialize<ModbusConfig>(json, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                var connectionConfig = config?.Connections?.FirstOrDefault(c => c.Id == connectionId);
-
-                if (connectionConfig == null)
-                {
-                    _logger.LogWarning("在配置中未找到连接: {ConnectionId}", connectionId);
-                }
-
-                return connectionConfig;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "加载连接配置失败: {ConnectionId}", connectionId);
-                return null;
             }
         }
     }

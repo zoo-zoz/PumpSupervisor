@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using PumpSupervisor.Domain.Events;
 using PumpSupervisor.Domain.Models;
+using PumpSupervisor.Infrastructure.Cache;
 using PumpSupervisor.Infrastructure.Modbus.Commands;
 using PumpSupervisor.Infrastructure.Storage.ModbusSlave;
 using PumpSupervisor.Infrastructure.Telemetry;
 using System.Diagnostics;
-using System.Text.Json;
 using Wolverine;
 
 namespace PumpSupervisor.Infrastructure.Modbus.Handlers
@@ -16,22 +16,24 @@ namespace PumpSupervisor.Infrastructure.Modbus.Handlers
         private readonly ILogger<ModbusReadCommandHandler> _logger;
         private readonly ModbusTcpSlaveService _slaveService;
         private readonly IMessageBus _messageBus;
+        private readonly IModbusConfigCacheService _configCache; // ✅ 新增
 
         public ModbusReadCommandHandler(
             IModbusConnectionManager connectionManager,
             ILogger<ModbusReadCommandHandler> logger,
             ModbusTcpSlaveService slaveService,
-            IMessageBus messageBus)
+            IMessageBus messageBus,
+            IModbusConfigCacheService configCache) // ✅ 新增
         {
             _connectionManager = connectionManager;
             _logger = logger;
             _slaveService = slaveService;
             _messageBus = messageBus;
+            _configCache = configCache; // ✅ 新增
         }
 
         public async Task<ModbusCommandResult> Handle(ReadModbusDataCommand command, CancellationToken cancellationToken)
         {
-            // 创建 Activity 用于分布式追踪
             using var activity = AppTelemetry.ActivitySource.StartActivity("ModbusRead", ActivityKind.Client);
             activity?.SetTag("connection.id", command.ConnectionId);
             activity?.SetTag("device.id", command.DeviceId);
@@ -45,20 +47,21 @@ namespace PumpSupervisor.Infrastructure.Modbus.Handlers
                 _logger.LogDebug("🔄 开始处理读取: Connection={ConnectionId}, Device={DeviceId}",
                     command.ConnectionId, command.DeviceId);
 
-                // 1. 加载配置
-                var config = await LoadConnectionConfigAsync(command.ConnectionId);
+                // ========== ✅ 修改：使用缓存服务加载配置 ==========
+                var config = await _configCache.GetConnectionConfigAsync(command.ConnectionId);
                 if (config == null)
                 {
                     activity?.SetStatus(ActivityStatusCode.Error, "连接配置未找到");
                     return new ModbusCommandResult(false, $"找不到连接配置: {command.ConnectionId}");
                 }
 
-                var deviceConfig = config.Devices?.FirstOrDefault(d => d.Id == command.DeviceId);
+                var deviceConfig = await _configCache.GetDeviceConfigAsync(command.ConnectionId, command.DeviceId);
                 if (deviceConfig == null)
                 {
                     activity?.SetStatus(ActivityStatusCode.Error, "设备配置未找到");
                     return new ModbusCommandResult(false, $"找不到设备配置: {command.DeviceId}");
                 }
+                // ===================================================
 
                 activity?.SetTag("register.type", config.RegisterType);
                 activity?.SetTag("slave.id", config.SlaveId);
@@ -260,36 +263,6 @@ namespace PumpSupervisor.Infrastructure.Modbus.Handlers
                     ex.Message);
 
                 return new ModbusCommandResult(false, $"读取失败: {ex.Message}");
-            }
-        }
-
-        private async Task<ModbusConnectionConfig?> LoadConnectionConfigAsync(string connectionId)
-        {
-            try
-            {
-                var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "readModbus.json");
-
-                if (!File.Exists(configPath))
-                {
-                    _logger.LogError("❌ 配置文件不存在: {Path}", configPath);
-                    return null;
-                }
-
-                var json = await File.ReadAllTextAsync(configPath);
-
-                var config = JsonSerializer.Deserialize<ModbusConfig>(json, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    ReadCommentHandling = JsonCommentHandling.Skip,
-                    AllowTrailingCommas = true
-                });
-
-                return config?.Connections?.FirstOrDefault(c => c.Id == connectionId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "❌ 加载配置失败: {ConnectionId}", connectionId);
-                return null;
             }
         }
     }
